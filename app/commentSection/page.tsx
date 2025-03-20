@@ -1,3 +1,5 @@
+
+'use client'
 import React, { useEffect, useState } from 'react';
 import { ScrollShadow } from "@heroui/scroll-shadow";
 import CommentList from '@/components/componentList/page';
