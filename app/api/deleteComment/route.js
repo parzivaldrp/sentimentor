@@ -1,9 +1,10 @@
+
 import { NextResponse } from "next/server";
 import connectDB from "../../../lib/connectDb";
 import Comment from "../../models/Comment";
 
 export async function DELETE(req) {
-  try {
+  try { 
     await connectDB();
 
     const { id } = await req.json(); 

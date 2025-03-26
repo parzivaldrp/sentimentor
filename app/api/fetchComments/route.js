@@ -1,9 +1,9 @@
 
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import Comment from '../../models/Comment'; 
 import connectDB from '../../../lib/connectDb'; 
 
-export async function GET(req) {
+export async function GET() {
   try {
     await connectDB(); 
     const comments = await Comment.find(); 
