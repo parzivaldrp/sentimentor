@@ -8,7 +8,6 @@ export async function POST(req = NextRequest) {
       await connectDB();
       const reqBody = await req.json();
       const { name, comment} = reqBody;
-      console.log('Request body:', reqBody);    
 
       const newComment = new Comment({
         name,
@@ -23,7 +22,6 @@ export async function POST(req = NextRequest) {
         commentsa
       });
     } catch (err) {
-      console.error('Error:', err.message);
       return NextResponse.json({ error: err.message }, { status: 500 });
     }
   } else {

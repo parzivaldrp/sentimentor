@@ -9,7 +9,6 @@ export async function GET(req) {
     const comments = await Comment.find(); 
     return NextResponse.json({ comments });
   } catch (error) {
-    console.error('Error fetching comments:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

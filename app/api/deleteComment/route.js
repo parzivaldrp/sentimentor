@@ -20,7 +20,6 @@ export async function DELETE(req) {
 
     return NextResponse.json({ message: "Comment deleted successfully" }, { status: 200 });
   } catch (error) {
-    console.error("Error deleting comment:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

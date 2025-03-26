@@ -20,7 +20,6 @@ export async function POST(req) {
 
         return NextResponse.json({ text, sentiment: result.Sentiment });
     } catch (error) {
-        console.error("AWS Comprehend Error:", error);
         return NextResponse.json({ error: "Failed to analyze sentiment" }, { status: 500 });
     }
 }

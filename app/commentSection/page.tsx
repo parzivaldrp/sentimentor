@@ -1,4 +1,5 @@
 "use client"
+
 import { useEffect, useState } from 'react';
 import { ScrollShadow } from "@heroui/scroll-shadow";
 import CommentList from '@/components/CommentList/page';
@@ -26,7 +27,6 @@ export default function CommentSectionPage() {
         const data = await response.json();
         setComments(data.comments);
       } catch (error) {
-        console.error('Error fetching comments:', error);
         setError('Error loading comments');
       }
     };
@@ -59,7 +59,6 @@ export default function CommentSectionPage() {
         promise: new Promise((resolve) => setTimeout(resolve, 3000)),
       });
     } catch (error) {
-      console.error("Error deleting comment:", error);
     }
   };
 
@@ -80,7 +79,6 @@ export default function CommentSectionPage() {
       const data = await response.json();
       setSentiments((prev) => ({ ...prev, [commentId]: data.sentiment }));
     } catch (error) {
-      console.error("Error analyzing sentiment:", error);
     }
     setLoading(null);
   };
