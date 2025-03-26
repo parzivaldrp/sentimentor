@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import { Tabs, Tab } from "@heroui/tabs"
 import { Card, CardBody } from "@heroui/card"

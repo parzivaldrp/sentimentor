@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import { title, subtitle } from "@/components/primitives";
 import CommentTabs from "@/components/CommentTabs/page";
