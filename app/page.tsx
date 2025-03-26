@@ -11,7 +11,7 @@ export default function Home() {
         <span className={title({ color: "violet" })}>Sentiment&nbsp;</span>
         <br />
         <span className={title()}>
-          Analysis 🧠 💬
+        `Analysis 🧠 💬`  
         </span>
         <div className={subtitle({ class: "mt-4" })}>
           Instant Sentiment Detection – Get AI-driven insights in seconds.

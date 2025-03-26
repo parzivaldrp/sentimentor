@@ -1,7 +1,7 @@
 "use client"
 
-import React from 'react';
-import CommentItem from '../commentItems/page';
+import React from "react";
+import CommentItem from "../commentItems/page";
 
 interface Comment {
     _id: string;

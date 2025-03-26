@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import { Textarea } from "@heroui/input";
@@ -15,18 +15,14 @@ interface ApiResponse {
 }
 
 const AddCommentPage: React.FC = () => {
-  const [name, setName] = useState<string>('');
-  const [comment, setComment] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+  const [name, setName] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [action, setAction] = useState<string | null>(null);
-
-
-
 
   const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-
   const handleChangeComment = (event: ChangeEvent<HTMLInputElement>) => {
     setComment(event.target.value);
   };
@@ -34,10 +30,10 @@ const AddCommentPage: React.FC = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/sendComment', {
-        method: 'POST',
+      const response = await fetch("/api/sendComment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ name, comment }),
       });
@@ -45,26 +41,26 @@ const AddCommentPage: React.FC = () => {
       const data: ApiResponse = await response.json();
       if (data.success) {
         addToast({
-          color: 'secondary',
+          color: "secondary",
           title: "Comment stored successfully!",
           promise: new Promise((resolve) => setTimeout(resolve, 3000)),
         });
-        setMessage('Comment stored successfully!');
-        setName(''); // Clear the name input
-        setComment(''); // Clear the comment input
-        setAction('submit');
+        setMessage("Comment stored successfully!");
+        setName(""); // Clear the name input
+        setComment(""); // Clear the comment input
+        setAction("submit");
       } else {
         addToast({
-          color: 'danger',
+          color: "danger",
           title: "Comment stored Failed to store comment: !",
           promise: new Promise((resolve) => setTimeout(resolve, 3000)),
         });
-        setMessage('Failed to store comment: ' + data.error);
-        setAction('error');
+        setMessage("Failed to store comment: " + data.error);
+        setAction("error");
       }
     } catch (error) {
-      setMessage('An error occurred while submitting the comment.');
-      setAction('error');
+      setMessage("An error occurred while submitting the comment.");
+      setAction("error");
     }
   };
 
@@ -83,7 +79,6 @@ const AddCommentPage: React.FC = () => {
           type="text"
           value={name}
           label="name"
-
           onChange={handleChangeName}
         />
         <Textarea
@@ -95,19 +90,13 @@ const AddCommentPage: React.FC = () => {
           minRows={4}
           cols={50}
           onChange={handleChangeComment}
-
           value={comment}
           placeholder="Enter your comment" />
-
-
-
 
         <div className="flex gap-2">
           <Tooltip color="primary" content="add comment">
              <Button color="primary" type="submit"> Comment </Button>
           </Tooltip>
-
-
         </div>
       </Form>
 

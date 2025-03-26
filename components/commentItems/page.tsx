@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React from "react";
 import { User } from "@heroui/user";
 import { Button } from "@heroui/button";
 import { Spacer } from "@heroui/spacer";
@@ -51,7 +51,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
                     name={comment.name}
                     description={
                         <div>
-                            <p className={`max-w-[200px] ${expandedCommentId === comment._id ? '' : 'max-h-[15px] overflow-hidden'} break-words`}>
+                            <p className={`max-w-[200px] ${expandedCommentId === comment._id ? "" : "max-h-[15px] overflow-hidden"} break-words`}>
                                 {comment.comment}
                             </p>
                             {expandedCommentId !== comment._id && (
@@ -67,8 +67,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
                         </div>
                     }
                 />
-                <img src="delete.svg" onClick={() => deleteComment(comment._id)} className="w-4 h-4 mt-2 hover:w-3 h-4 mt-1" alt="Delete Comment" />
-            </div>
+                <button onClick={() => deleteComment(comment._id)} className="w-4 h-4 mt-2 hover:w-3 h-4 mt-1">
+                    <img src="delete.svg" alt="Delete Comment" />
+                </button>            </div>
             <Spacer y={2} />
             <div className="flex gap-2">
                 <Spacer x={8} />

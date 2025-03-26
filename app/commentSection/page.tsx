@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import { ScrollShadow } from "@heroui/scroll-shadow";
-import CommentList from '@/components/CommentList/page';
+import CommentList from "@/components/CommentList/page";
 import { addToast } from "@heroui/toast";
 
 interface Comment {
@@ -22,12 +22,12 @@ export default function CommentSectionPage() {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch('/api/fetchComments');
-        if (!response.ok) throw new Error('Network response was not ok');
+        const response = await fetch("/api/fetchComments");
+        if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setComments(data.comments);
       } catch (error) {
-        setError('Error loading comments');
+        setError("Error loading comments");
       }
     };
 
@@ -45,7 +45,7 @@ export default function CommentSectionPage() {
       if (!response.ok) {
         const data = await response.json();
         addToast({
-          color: 'danger',
+          color: "danger",
           title: "Failed to delete comment",
           promise: new Promise((resolve) => setTimeout(resolve, 3000)),
         });
@@ -54,7 +54,7 @@ export default function CommentSectionPage() {
 
       setComments((prevComments) => prevComments.filter(comment => comment._id !== id));
       addToast({
-        color: 'secondary',
+        color: "secondary",
         title: "Comment deleted!",
         promise: new Promise((resolve) => setTimeout(resolve, 3000)),
       });
