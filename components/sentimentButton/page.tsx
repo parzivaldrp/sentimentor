@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import React from 'react';
+import React from "react";
 import { Button } from "@heroui/button";
 
 interface SentimentButtonProps {
@@ -8,14 +8,17 @@ interface SentimentButtonProps {
   loading: boolean;
 }
 
-const SentimentButton: React.FC<SentimentButtonProps> = ({ analyzeSentiment, loading }) => {
+const SentimentButton: React.FC<SentimentButtonProps> = ({
+  analyzeSentiment,
+  loading,
+}) => {
   return (
     <Button
       color="primary"
+      disabled={loading}
       size="sm"
       variant="flat"
       onClick={analyzeSentiment}
-      disabled={loading}
     >
       {loading ? "Analyzing..." : "Sentiment"}
     </Button>

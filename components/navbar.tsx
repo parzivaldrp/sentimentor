@@ -53,7 +53,6 @@ export const Navbar = () => {
             <p className="font-bold text-inherit">SENTIMEMTOR</p>
           </NextLink>
         </NavbarBrand>
-       
       </NavbarContent>
 
       <NavbarContent
@@ -73,7 +72,6 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-       
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

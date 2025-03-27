@@ -39,10 +39,11 @@ const AddCommentPage: React.FC = () => {
       });
 
       const data: ApiResponse = await response.json();
+
       if (data.success) {
         addToast({
           color: "secondary",
-          title: "Comment stored successfully!",
+          title: `${name} added the comment: "${comment}"`,
           promise: new Promise((resolve) => setTimeout(resolve, 3000)),
         });
         setMessage("Comment stored successfully!");
@@ -59,6 +60,10 @@ const AddCommentPage: React.FC = () => {
         setAction("error");
       }
     } catch (error) {
+      if (process.env.NODE_ENV === "development") {
+        /* eslint-disable-next-line no-console */
+        console.error("Error submitting comment:", error);
+      }
       setMessage("An error occurred while submitting the comment.");
       setAction("error");
     }
@@ -73,33 +78,36 @@ const AddCommentPage: React.FC = () => {
         <Input
           isRequired
           errorMessage="Please enter a valid name"
+          label="name"
           labelPlacement="outside"
           name="username"
           placeholder="Enter your name"
           type="text"
           value={name}
-          label="name"
           onChange={handleChangeName}
         />
         <Textarea
           isRequired
           className="max-w-xs"
-          label="Comment"
-          errorMessage="Please enter a valid comment"
-          type="text"
-          minRows={4}
           cols={50}
-          onChange={handleChangeComment}
+          errorMessage="Please enter a valid comment"
+          label="Comment"
+          minRows={4}
+          placeholder="Enter your comment"
+          type="text"
           value={comment}
-          placeholder="Enter your comment" />
+          onChange={handleChangeComment}
+        />
 
         <div className="flex gap-2">
           <Tooltip color="primary" content="add comment">
-             <Button color="primary" type="submit"> Comment </Button>
+            <Button color="primary" type="submit">
+              {" "}
+              Comment{" "}
+            </Button>
           </Tooltip>
         </div>
       </Form>
-
     </div>
   );
 };

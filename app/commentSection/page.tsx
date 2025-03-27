@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { ScrollShadow } from "@heroui/scroll-shadow";
-import CommentList from "@/components/CommentList/page";
 import { addToast } from "@heroui/toast";
+
+import CommentList from "@/components/CommentList/page";
 
 interface Comment {
   _id: string;
@@ -14,20 +15,28 @@ interface Comment {
 
 export default function CommentSectionPage() {
   const [comments, setComments] = useState<Comment[]>([]);
-  const [sentiments, setSentiments] = useState<{ [key: string]: string | undefined }>({});
+  const [sentiments, setSentiments] = useState<{
+    [key: string]: string | undefined;
+  }>({});
   const [loading, setLoading] = useState<string | null>(null);
-  const [expandedCommentId, setExpandedCommentId] = useState<string | null>(null);
+  const [expandedCommentId, setExpandedCommentId] = useState<string | null>(
+    null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const response = await fetch("/api/fetchComments");
+
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
+
         setComments(data.comments);
       } catch (error) {
-        setError("Error loading comments");
+        setError(
+          error instanceof Error ? error.message : "Error loading comments",
+        );
       }
     };
 
@@ -44,6 +53,7 @@ export default function CommentSectionPage() {
 
       if (!response.ok) {
         const data = await response.json();
+
         addToast({
           color: "danger",
           title: "Failed to delete comment",
@@ -52,13 +62,18 @@ export default function CommentSectionPage() {
         throw new Error(data.error || "Failed to delete comment");
       }
 
-      setComments((prevComments) => prevComments.filter(comment => comment._id !== id));
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment._id !== id),
+      );
       addToast({
         color: "secondary",
         title: "Comment deleted!",
         promise: new Promise((resolve) => setTimeout(resolve, 3000)),
       });
     } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "unable to delete the comment",
+      );
     }
   };
 
@@ -66,6 +81,7 @@ export default function CommentSectionPage() {
     if (loading === commentId) {
       setSentiments((prev) => ({ ...prev, [commentId]: undefined }));
       setLoading(null);
+
       return;
     }
     setLoading(commentId);
@@ -77,9 +93,16 @@ export default function CommentSectionPage() {
       });
 
       const data = await response.json();
+
       setSentiments((prev) => ({ ...prev, [commentId]: data.sentiment }));
     } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Error analyzing the sentiment",
+      );
     }
+
     setLoading(null);
   };
 
@@ -94,12 +117,12 @@ export default function CommentSectionPage() {
   return (
     <ScrollShadow hideScrollBar className="w-[300px] h-[500px]">
       <CommentList
+        analyzeSentiment={analyzeSentiment}
         comments={comments}
         deleteComment={deleteComment}
-        analyzeSentiment={analyzeSentiment}
-        sentiments={sentiments}
-        loading={loading}
         expandedCommentId={expandedCommentId}
+        loading={loading}
+        sentiments={sentiments}
         toggleExpand={toggleExpand}
       />
     </ScrollShadow>

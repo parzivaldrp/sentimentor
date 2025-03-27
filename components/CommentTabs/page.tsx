@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { Tabs, Tab } from "@heroui/tabs"
-import { Card, CardBody } from "@heroui/card"
+import { Tabs, Tab } from "@heroui/tabs";
+import { Card, CardBody } from "@heroui/card";
+
 import AddCommentPage from "@/app/addComment/page";
 import CommentSectionPage from "@/app/commentSection/page";
-
 
 export default function CommentTabs() {
   return (
@@ -14,7 +14,6 @@ export default function CommentTabs() {
           <Card>
             <CardBody>
               <AddCommentPage />
-
             </CardBody>
           </Card>
         </Tab>
@@ -25,7 +24,6 @@ export default function CommentTabs() {
             </CardBody>
           </Card>
         </Tab>
-
       </Tabs>
     </div>
   );
