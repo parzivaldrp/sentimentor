@@ -2,29 +2,29 @@ import connectDB from '../../../lib/connectDb';
 import Comment from '../../models/Comment';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req = NextRequest) {
-  if (req.method === 'POST') {
-    try {
-      await connectDB();
-      const reqBody = await req.json();
-      const { name, comment} = reqBody;
+export async function POST(req) {
+  if (!(req instanceof NextRequest)) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 
-      const newComment = new Comment({
-        name,
-        comment
-      });
+  try {
+    await connectDB();
+    const reqBody = await req.json();
+    const { name, comment } = reqBody;
 
-      const commentsa = await newComment.save();
+    const newComment = new Comment({
+      name,
+      comment,
+    });
 
-      return NextResponse.json({
-        message: "Comment strored successfully",
-        success: true,
-        commentsa
-      });
-    } catch (err) {
-      return NextResponse.json({ error: err.message }, { status: 500 });
-    }
-  } else {
-    return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+    const savedComment = await newComment.save();
+
+    return NextResponse.json({
+      message: "Comment stored successfully",
+      success: true,
+      comment: savedComment,
+    });
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
