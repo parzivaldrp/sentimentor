@@ -3,20 +3,14 @@ import Comment from '../../models/Comment';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req) {
-  if (!(req instanceof NextRequest)) {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
-  }
+ 
 
   try {
     await connectDB();
     const reqBody = await req.json();
     const { name, comment } = reqBody;
 
-    const newComment = new Comment({
-      name,
-      comment,
-    });
-
+    const newComment = new Comment({ name, comment });
     const savedComment = await newComment.save();
 
     return NextResponse.json({
