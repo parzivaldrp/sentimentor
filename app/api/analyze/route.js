@@ -1,11 +1,7 @@
 import { NextResponse } from "next/server";
-import AWS from "aws-sdk";
+import { ComprehendClient, DetectSentimentCommand } from "@aws-sdk/client-comprehend";
 
-const region = process.env.AWS_REGION; 
-
-AWS.config.update({ region });
-
-const comprehend = new AWS.Comprehend();
+const client = new ComprehendClient({ region: process.env.AWS_REGION });
 
 export async function POST(req) {
     try {
@@ -16,10 +12,12 @@ export async function POST(req) {
         }
 
         const params = { Text: text, LanguageCode: "en" };
-        const result = await comprehend.detectSentiment(params).promise();
+        const command = new DetectSentimentCommand(params);
+        const result = await client.send(command);
 
         return NextResponse.json({ text, sentiment: result.Sentiment });
     } catch (error) {
+        console.error("Error analyzing sentiment:", error); // Log the error
         return NextResponse.json({ error: "Failed to analyze sentiment" }, { status: 500 });
     }
 }

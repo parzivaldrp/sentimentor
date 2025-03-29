@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
   },
   "dependencies": {
+    "@aws-sdk/client-comprehend": "^3.777.0",
     "@heroui/button": "2.2.16",
     "@heroui/card": "^2.2.15",
     "@heroui/code": "2.2.12",
