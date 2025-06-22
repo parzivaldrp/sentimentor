@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import { ComprehendClient, DetectSentimentCommand } from "@aws-sdk/client-comprehend";
 
@@ -20,9 +21,19 @@ export async function POST(req) {
 
         const result = await comprehendClient.send(command);
 
+        
+
         return NextResponse.json({ text, sentiment: result.Sentiment });
-    } catch (error) {
-        console.error("Sentiment analysis error:", error);
+
+
+    }  catch (error) {
+        console.error("Sentiment analysis error:", {
+            message: error instanceof Error ? error.message : "Unknown error",
+            stack: error instanceof Error ? error.stack : null,
+            raw: error,
+        });
+    
         return NextResponse.json({ error: "Failed to analyze sentiment" }, { status: 500 });
     }
+    
 }

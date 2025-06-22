@@ -18,8 +18,8 @@ import {
   TwitterIcon,
   GithubIcon,
   DiscordIcon,
-  SearchIcon,
-  Logo,
+  SearchIcon
+  
 } from "@/components/icons";
 
 export const Navbar = () => {
@@ -49,7 +49,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 `max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
+        <img src="/logo.png" alt="Sentimentor Logo" className="w-8 h-8" />
             <p className="font-bold text-inherit">SENTIMEMTOR</p>
           </NextLink>
         </NavbarBrand>
